@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hyout.dao.LogEventMapper" >
+  <resultMap id="BaseResultMap" type="com.hyout.pojo.LogEvent" >
+    <constructor >
+      <idArg column="event_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="timestmp" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="logger_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="level_string" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="thread_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reference_flag" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="arg0" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_filename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_class" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_line" jdbcType="CHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.hyout.pojo.LogEvent" >
+    <constructor >
+      <idArg column="event_id" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="timestmp" jdbcType="BIGINT" javaType="java.lang.Long" />
+      <arg column="logger_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="level_string" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="thread_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="reference_flag" jdbcType="SMALLINT" javaType="java.lang.Short" />
+      <arg column="arg0" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg1" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg2" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="arg3" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_filename" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_class" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_method" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="caller_line" jdbcType="CHAR" javaType="java.lang.String" />
+      <arg column="formatted_message" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    event_id, timestmp, logger_name, level_string, thread_name, reference_flag, arg0, 
+    arg1, arg2, arg3, caller_filename, caller_class, caller_method, caller_line
+  </sql>
+  <sql id="Blob_Column_List" >
+    formatted_message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logging_event
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from logging_event
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.hyout.pojo.LogEvent" >
+    insert into logging_event (event_id, timestmp, logger_name, 
+      level_string, thread_name, reference_flag, 
+      arg0, arg1, arg2, arg3, 
+      caller_filename, caller_class, caller_method, 
+      caller_line, formatted_message)
+    values (#{eventId,jdbcType=BIGINT}, #{timestmp,jdbcType=BIGINT}, #{loggerName,jdbcType=VARCHAR}, 
+      #{levelString,jdbcType=VARCHAR}, #{threadName,jdbcType=VARCHAR}, #{referenceFlag,jdbcType=SMALLINT}, 
+      #{arg0,jdbcType=VARCHAR}, #{arg1,jdbcType=VARCHAR}, #{arg2,jdbcType=VARCHAR}, #{arg3,jdbcType=VARCHAR}, 
+      #{callerFilename,jdbcType=VARCHAR}, #{callerClass,jdbcType=VARCHAR}, #{callerMethod,jdbcType=VARCHAR}, 
+      #{callerLine,jdbcType=CHAR}, #{formattedMessage,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hyout.pojo.LogEvent" >
+    insert into logging_event
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        event_id,
+      </if>
+      <if test="timestmp != null" >
+        timestmp,
+      </if>
+      <if test="loggerName != null" >
+        logger_name,
+      </if>
+      <if test="levelString != null" >
+        level_string,
+      </if>
+      <if test="threadName != null" >
+        thread_name,
+      </if>
+      <if test="referenceFlag != null" >
+        reference_flag,
+      </if>
+      <if test="arg0 != null" >
+        arg0,
+      </if>
+      <if test="arg1 != null" >
+        arg1,
+      </if>
+      <if test="arg2 != null" >
+        arg2,
+      </if>
+      <if test="arg3 != null" >
+        arg3,
+      </if>
+      <if test="callerFilename != null" >
+        caller_filename,
+      </if>
+      <if test="callerClass != null" >
+        caller_class,
+      </if>
+      <if test="callerMethod != null" >
+        caller_method,
+      </if>
+      <if test="callerLine != null" >
+        caller_line,
+      </if>
+      <if test="formattedMessage != null" >
+        formatted_message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        #{eventId,jdbcType=BIGINT},
+      </if>
+      <if test="timestmp != null" >
+        #{timestmp,jdbcType=BIGINT},
+      </if>
+      <if test="loggerName != null" >
+        #{loggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelString != null" >
+        #{levelString,jdbcType=VARCHAR},
+      </if>
+      <if test="threadName != null" >
+        #{threadName,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceFlag != null" >
+        #{referenceFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="arg0 != null" >
+        #{arg0,jdbcType=VARCHAR},
+      </if>
+      <if test="arg1 != null" >
+        #{arg1,jdbcType=VARCHAR},
+      </if>
+      <if test="arg2 != null" >
+        #{arg2,jdbcType=VARCHAR},
+      </if>
+      <if test="arg3 != null" >
+        #{arg3,jdbcType=VARCHAR},
+      </if>
+      <if test="callerFilename != null" >
+        #{callerFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="callerClass != null" >
+        #{callerClass,jdbcType=VARCHAR},
+      </if>
+      <if test="callerMethod != null" >
+        #{callerMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="callerLine != null" >
+        #{callerLine,jdbcType=CHAR},
+      </if>
+      <if test="formattedMessage != null" >
+        #{formattedMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hyout.pojo.LogEvent" >
+    update logging_event
+    <set >
+      <if test="timestmp != null" >
+        timestmp = #{timestmp,jdbcType=BIGINT},
+      </if>
+      <if test="loggerName != null" >
+        logger_name = #{loggerName,jdbcType=VARCHAR},
+      </if>
+      <if test="levelString != null" >
+        level_string = #{levelString,jdbcType=VARCHAR},
+      </if>
+      <if test="threadName != null" >
+        thread_name = #{threadName,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceFlag != null" >
+        reference_flag = #{referenceFlag,jdbcType=SMALLINT},
+      </if>
+      <if test="arg0 != null" >
+        arg0 = #{arg0,jdbcType=VARCHAR},
+      </if>
+      <if test="arg1 != null" >
+        arg1 = #{arg1,jdbcType=VARCHAR},
+      </if>
+      <if test="arg2 != null" >
+        arg2 = #{arg2,jdbcType=VARCHAR},
+      </if>
+      <if test="arg3 != null" >
+        arg3 = #{arg3,jdbcType=VARCHAR},
+      </if>
+      <if test="callerFilename != null" >
+        caller_filename = #{callerFilename,jdbcType=VARCHAR},
+      </if>
+      <if test="callerClass != null" >
+        caller_class = #{callerClass,jdbcType=VARCHAR},
+      </if>
+      <if test="callerMethod != null" >
+        caller_method = #{callerMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="callerLine != null" >
+        caller_line = #{callerLine,jdbcType=CHAR},
+      </if>
+      <if test="formattedMessage != null" >
+        formatted_message = #{formattedMessage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.hyout.pojo.LogEvent" >
+    update logging_event
+    set timestmp = #{timestmp,jdbcType=BIGINT},
+      logger_name = #{loggerName,jdbcType=VARCHAR},
+      level_string = #{levelString,jdbcType=VARCHAR},
+      thread_name = #{threadName,jdbcType=VARCHAR},
+      reference_flag = #{referenceFlag,jdbcType=SMALLINT},
+      arg0 = #{arg0,jdbcType=VARCHAR},
+      arg1 = #{arg1,jdbcType=VARCHAR},
+      arg2 = #{arg2,jdbcType=VARCHAR},
+      arg3 = #{arg3,jdbcType=VARCHAR},
+      caller_filename = #{callerFilename,jdbcType=VARCHAR},
+      caller_class = #{callerClass,jdbcType=VARCHAR},
+      caller_method = #{callerMethod,jdbcType=VARCHAR},
+      caller_line = #{callerLine,jdbcType=CHAR},
+      formatted_message = #{formattedMessage,jdbcType=LONGVARCHAR}
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hyout.pojo.LogEvent" >
+    update logging_event
+    set timestmp = #{timestmp,jdbcType=BIGINT},
+      logger_name = #{loggerName,jdbcType=VARCHAR},
+      level_string = #{levelString,jdbcType=VARCHAR},
+      thread_name = #{threadName,jdbcType=VARCHAR},
+      reference_flag = #{referenceFlag,jdbcType=SMALLINT},
+      arg0 = #{arg0,jdbcType=VARCHAR},
+      arg1 = #{arg1,jdbcType=VARCHAR},
+      arg2 = #{arg2,jdbcType=VARCHAR},
+      arg3 = #{arg3,jdbcType=VARCHAR},
+      caller_filename = #{callerFilename,jdbcType=VARCHAR},
+      caller_class = #{callerClass,jdbcType=VARCHAR},
+      caller_method = #{callerMethod,jdbcType=VARCHAR},
+      caller_line = #{callerLine,jdbcType=CHAR}
+    where event_id = #{eventId,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByMerchantOrderNo" resultMap="ResultMapWithBLOBs" parameterType="string">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from logging_event
+    where formatted_message LIKE CONCAT('%',#{merchantOrderNo},'%')
+  </select>
+
+</mapper>
