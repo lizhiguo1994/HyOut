@@ -68,7 +68,7 @@
     <form id="pay" action="https://c.heepay.com/quick/pc/index.do" method="post">
         <p><label class="label_w">merchantId:(商户号)</label>          <input class="label_w" type="text" name="merchantId"        value="101053" id="merchantId"></p>
         <p><label class="label_w">merchantOrderNo:(订单号)</label>     <input class="label_w" type="text" name="merchantOrderNo"  value=<%= SmallTools.getDate("yyyyMMddHHmmss")+"hykj" %> id="merchantOrderNo" ></p>
-        <p><label class="label_w">merchantUserId:(商户用户id)</label>  <input class="label_w" type="text" name="merchantUserId"   value="123"></p>
+        <p><label class="label_w">merchantUserId:(商户用户id)</label>  <input class="label_w" type="text" name="merchantUserId"   value="hy01"></p>
         <p><label class="label_w">productCode:(产品编码)</label>       <input class="label_w" type="text" name="productCode"       value="HY_QUICKPAYH5" id="productCode"></p>
         <p><label class="label_w">payAmount:(金额(元))</label>         <input class="label_w" type="text" name="payAmount"         value="0.02" ></p>
         <p><label class="label_w">requestTime:(请求时间)</label>       <input class="label_w" type="text" name="requestTime"        value=<%= SmallTools.getDate("yyyyMMddHHmmss")%> ></p>

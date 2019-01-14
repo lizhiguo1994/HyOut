@@ -104,10 +104,10 @@ public class PayQueryServiceImpl implements IPayQueryService{
             return ServerResponse.createByError(ResponseConsts.ERROR.getCode(),"productCode值错误");
         }
         if ("HY_QUICKPAYH5".equals(productCode)){
-            productCode = "HY_QUICKPAYAPI";
+            productCode = "HY_QUICKPAYH5";
         }
         if ("HY_QUICKPAYPC".equals(productCode)){
-            productCode = "HY_QUICKPAYAPI";
+            productCode = "HY_QUICKPAYPC";
         }
         //创建签名数据参数名集合
         ArrayList<String> nameList = new ArrayList<String>();

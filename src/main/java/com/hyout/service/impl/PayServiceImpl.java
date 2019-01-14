@@ -195,7 +195,17 @@ public class PayServiceImpl implements IPayService{
             //urldecoe出错
             return ServerResponse.createByError(ResponseConsts.URLDECODER_ERROR.getCode(), ResponseConsts.URLDECODER_ERROR.getDesc());
         }
-        String[] signAndSignString = SmallTools.getSignAndSignString(queryString, payType);
+        //创建签名数据参数名集合
+        ArrayList<String> nameList = new ArrayList<String>();
+        nameList.add("merchantId");
+        nameList.add("merchantOrderNo");
+        nameList.add("merchantUserId");
+        nameList.add("notifyUrl");
+        nameList.add("payAmount");
+        nameList.add("productCode");
+        nameList.add("version");
+        nameList.add("key");
+        String[] signAndSignString = SmallTools.getSignAndSignString(queryString, payType, nameList);
         String sign = signAndSignString[0];
         String signString = signAndSignString[1];
         //拼接请求参数
@@ -203,7 +213,7 @@ public class PayServiceImpl implements IPayService{
         String returnParameter = HttpUtil.sendPost(UrlConsts.QUICK_H5_PAY, parameter);
         //给前台返回支付链接
         JSONObject returnParameterJson = new JSONObject(returnParameter);
-        if(returnParameterJson.getInt("retCode") == 1000){
+        if(returnParameterJson.getInt("respCode") == 1000){
             JSONObject data = returnParameterJson.getJSONObject("data");
             String tokenId = data.getString("tokenId");
             String hostUrl = data.getString("hostUrl");

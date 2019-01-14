@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>微信公众号</title>
+    <title>微信H5</title>
     <link type="text/css" rel="stylesheet" href="../css/gxs.css"/>
     <%--<style>
         .div_y {margin:0 auto;width:510px;text-align:left; }
@@ -64,14 +64,14 @@
 </head>
 <body>
 
-<h1>微信公众号</h1>
+<h1>微信H5</h1>
 <div class="div_y">
-    <form id="pay" action="https://open.heepay.com/aggrPay.do" method="post">
+    <form id="pay" action="http://localhost:8011/HyOut/pay" method="post">
         <p><label class="label_w">version:(版本号)</label>               <input class="label_w" type="text" name="version"           value="1.0"></p>
         <p><label class="label_w">merchantId:(商户号)</label>            <input class="label_w" type="text" name="merchantId"       value="101053" id="merchantId"></p>
         <p><label class="label_w">merchantBillNo:(商户订单号)</label>    <input class="label_w" type="text" name="merchantBillNo"  value=<%= SmallTools.getDate("yyyyMMddHHmmss")+"hykj" %> id="merchantBillNo"></p>
         <p><label class="label_w">requestTime:(请求时间)</label>         <input class="label_w" type="text" name="requestTime"     value=<%= SmallTools.getDate("yyyyMMddHHmmss") %> ></p>
-        <p><label class="label_w">tradeType:(交易类型)</label>           <input class="label_w" type="text" name="tradeType"       value="weixin_pub" id="tradeType"></p>
+        <p><label class="label_w">tradeType:(交易类型)</label>           <input class="label_w" type="text" name="tradeType"       value="weixin_h5" id="tradeType"></p>
         <p><label class="label_w">payAmt:(金额(元))</label>              <input class="label_w" type="text" name="payAmt"           value="0.20" ></p>
         <p><label class="label_w">notifyUrl:(异步地址)</label>           <input class="label_w" type="text" name="notifyUrl"       value="http://www.heepay.com"></p>
         <p><label class="label_w">returnUrl:(同步地址)</label>           <input class="label_w" type="text" name="returnUrl"       value="http://www.heepay.com"></p>
@@ -80,11 +80,8 @@
         <p><label class="label_w">goodsName:(商品名称)</label>           <input class="label_w" type="text" name="goodsName"        value="hy"></p>
         <p><label class="label_w">goodsDetail:(商品详细说明)</label>     <input class="label_w" type="text" name="goodsDetail"      value='{"n":"汇元网","id":"http://www.9186.com/index.aspx"}'></p>
         <p><label class="label_w">goodsNote:(支付说明)</label>           <input class="label_w" type="text" name="goodsNote"        value="123"></p>
-        <p><label class="label_w">qrCodeStatus:(返回二维码)</label>      <input class="label_w" type="text" name="qrCodeStatus"     value="N"></p>
-        <p><label class="label_w">subOpenid:(公众号下用户openid)</label> <input class="label_w" type="text" name="subOpenid"        value=""></p>
-        <p><label class="label_w">subAppid:(公众号AppID)</label>         <input class="label_w" type="text" name="subAppid"        value=""></p>
-        <p><label class="label_w">key:(秘钥)</label>                     <input class="label_w" type="text" name="key"              value="79475ddb910f70c28112a84ccb03930e" id="key"></p>
-        <p><label class="label_w">sign:(签名结果)</label>                <input class="label_w" type="text" name="sign"             value=""  id="sign"></p>
+        <p><label class="label_w">key:(秘钥)</label>                     <input class="label_w" type="text" name="key"              value="ce042b00a61300c130bc5d1ce5550ad3" id="key"></p>
+        <p><label class="label_w">sign:(签名结果)</label>                <input class="label_w" type="text" name="sign"             value="" id="sign"></p>
     </form>
     <p style="color:red">注：异步通知地址需要在汇付宝后台配置</p>
     <button id="submit" name="submit" value="提交">提交支付</button>
